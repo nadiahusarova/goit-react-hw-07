@@ -2,22 +2,22 @@ import React from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
-import { addContact, selectContacts } from "../../redux/contactsSlice";
+import { addContact } from "../../redux/contactsOps";
 import s from "./ContactForm.module.css";
 
 const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(selectContacts);
+  const contacts = useSelector((state) => state.contacts.items);
 
   const formSchema = Yup.object({
     name: Yup.string()
-      .required("please fill in the field")
-      .min(2, "name must be longer than 1 letter")
-      .max(30, " name must be shorter than 30 letter"),
+      .required("Please fill in the field")
+      .min(3, "Name must be longer than 2 letters")
+      .max(30, "Name must be shorter than 30 letters"),
     number: Yup.string()
-      .required("please fill in the field")
-      .min(7, "number must be longer than 6 numbers")
-      .max(12, "number must be shorter than 13 numbers"),
+      .required("Please fill in the field")
+      .min(7, "Number must be longer than 6 numbers")
+      .max(12, "Number must be shorter than 13 numbers"),
   });
 
   const initialValues = {
@@ -25,15 +25,15 @@ const ContactForm = () => {
     number: "",
   };
 
-  const handleSubmit = (data, actions) => {
+  const handleSubmit = (values, actions) => {
     const contactExists = contacts.some(
-      (contact) => contact.name.toLowerCase() === data.name.toLowerCase()
+      (contact) => contact.name.toLowerCase() === values.name.toLowerCase()
     );
 
     if (contactExists) {
-      alert(`${data.name} is already in contacts.`);
+      alert(`${values.name} is already in contacts.`);
     } else {
-      dispatch(addContact(data));
+      dispatch(addContact(values));
       actions.resetForm();
     }
   };

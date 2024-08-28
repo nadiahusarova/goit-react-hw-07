@@ -1,20 +1,18 @@
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchContacts } from "./redux/contactsOps";
 import ContactForm from "./components/ContactForm/ContactForm";
-import SearchBox from "./components/SearchBox/SearchBox";
 import ContactList from "./components/ContactList/ContactList";
-import { useDispatch, useSelector } from "react-redux";
-import { selectContacts } from "./redux/contactsSlice";
-import { selectNameFilter, changeFilter } from "./redux/filtersSlice";
+import SearchBox from "./components/SearchBox/SearchBox";
+import { changeFilter } from "./redux/filtersSlice";
 import s from "./App.module.css";
 
 const App = () => {
   const dispatch = useDispatch();
 
-  const contacts = useSelector(selectContacts);
-  const searchName = useSelector(selectNameFilter);
-
-  const filtredContact = contacts.filter((contact) =>
-    contact.name.toLowerCase().includes(searchName.toLowerCase())
-  );
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   const handleSearch = (value) => {
     dispatch(changeFilter(value));
@@ -23,12 +21,9 @@ const App = () => {
   return (
     <div className={s.wrap}>
       <h1 className={s.h1}>Phonebook</h1>
-
       <ContactForm />
-
       <SearchBox onSearch={handleSearch} />
-
-      <ContactList data={filtredContact} />
+      <ContactList />
     </div>
   );
 };

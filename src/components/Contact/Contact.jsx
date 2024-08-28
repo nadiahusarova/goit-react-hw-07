@@ -1,5 +1,6 @@
+import React from "react";
 import { FaRegUser, FaPhone } from 'react-icons/fa';
-import s from './Contact.module.css';
+import s from "./Contact.module.css";
 
 const Contact = ({ contact, handleDelete }) => {
   return (

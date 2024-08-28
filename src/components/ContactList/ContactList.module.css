@@ -1,4 +1,5 @@
-.wrapper {
+.contactList {
+  list-style: none;
     align-items: center;
     display: flex;
     flex-wrap: wrap;

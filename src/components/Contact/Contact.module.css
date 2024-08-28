@@ -11,12 +11,15 @@
   background-color: rgba(18, 192, 18, 0.884);
   color: aliceblue;
   padding: 10px;
-  border: px solid rgb(255, 255, 255);
+  border: 1px solid rgb(255, 255, 255); 
+  cursor: pointer; 
 }
+
 .button:hover {
   background-color: rgb(230, 7, 26);
   border: 2px solid rgb(32, 3, 3);
 }
+
 .icon {
   margin-right: 5px;
 }
