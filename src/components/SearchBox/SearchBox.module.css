@@ -1,0 +1,18 @@
+.label {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .input {
+    padding: 5px;
+    border-radius: 6px;
+    border: 2px solid rgb(8, 196, 18);
+    margin-bottom: 20px;
+    width: 250px;
+  }
+
+  .input:hover{
+    border: 2px solid rgb(130, 184, 125);
+  }
